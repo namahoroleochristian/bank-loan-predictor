@@ -22,5 +22,13 @@ df.to_csv("Cleaned-Loan-Approval-Prediction.csv")
 df["ApplicantIncome"] = (df["ApplicantIncome"] - df["ApplicantIncome"].mean()) / df["ApplicantIncome"].std() 
 df["LoanAmount"] = (df["LoanAmount"] - df["LoanAmount"].mean() ) / df["LoanAmount"].std()
 
-# df.drop("")
-print(df["LoanAmount"],"df info")    
+
+X = df.drop("Loan_Status",axis=1)
+Y = df["Loan_Status"]
+
+X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state= 42)
+model = RandomForestClassifier()
+model.fit(X_train,Y_train)
+
+
+print(Y,"df info")    
