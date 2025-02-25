@@ -16,5 +16,6 @@ df["Credit_History"].fillna(df["Credit_History"].mode()[0],inplace=True)
 df["Loan_Amount_Term"].fillna(df["Loan_Amount_Term"].mode()[0],inplace=True)
 
 df.drop_duplicates(inplace=True)
-
-print(df.info(),"df info")    
+df.to_csv("Cleaned-Loan-Approval-Prediction.csv")
+df["ApplicantIncome"] = (df["ApplicantIncome"] - df["ApplicantIncome"].mean()) / df["ApplicantIncome"].std() 
+print(df["ApplicantIncome"],"df info")    
