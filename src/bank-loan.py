@@ -41,14 +41,14 @@ X["Dependents"] = encoder.fit_transform(X["Dependents"])
 Y = encoder.fit_transform(df["Loan_Status"])
 # X.to_csv("Cleaned-Loan-Approval-Prediction_Dummy_X.csv")
 
-print(X)
-print(Y)
+# print(X)
+# print(Y)
 
 
-# X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state= 42)
-# model = RandomForestClassifier()
-# model.fit(X_train,Y_train)
+X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state= 42)
+model = RandomForestClassifier()
+model.fit(X_train,Y_train)
 
-# joblib.dump(model,"loan-approval-predictor.pkl")
+joblib.dump(model,"loan-approval-predictor.pkl")
 
-# print(Y,"df info")    
+print(Y,"df info")    
