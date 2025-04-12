@@ -2,13 +2,14 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score
 import joblib
 
 
 df = pd.read_csv('Loan-Approval-Prediction.csv')
 # print(df.head(),"head data")    
-print(df.describe(),"df description")    
-print(df.isnull().sum(),"sum of null values on our data set")    
+# print(df.describe(),"df description")    
+# print(df.isnull().sum(),"sum of null values on our data set")    
 categorical_data = ["Gender","Married", "Self_Employed", "Dependents"]
 
 for col in categorical_data:
@@ -46,9 +47,17 @@ Y = encoder.fit_transform(df["Loan_Status"])
 
 
 X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state= 42)
-model = RandomForestClassifier()
-model.fit(X_train,Y_train)
+# model = RandomForestClassifier()
+# model.fit(X_train,Y_train)
 
-joblib.dump(model,"loan-approval-predictor.pkl")
+# joblib.dump(model,"loan-approval-predictor.pkl")
 
-print(Y,"df info")    
+# print(Y,"df info")    
+loaded_model = joblib.load("loan-approval-predictor.pkl")
+
+y_prediction = loaded_model.predict(X_test)
+accuracy = accuracy_score(Y_test,y_prediction)
+accuracy = accuracy * 100
+accuracy = accuracy.round()
+print(f"accuracy is {accuracy} %")
+# print(f"prediction is is {len(y_prediction)}")
